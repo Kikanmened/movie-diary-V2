@@ -1,0 +1,20 @@
+.DS_Store
+
+# Dependencies
+node_modules/
+
+# Production builds
+dist/
+build/
+
+# Framework caches
+.cache/
+
+# Package manager logs
+npm-debug.log*
+
+# Environment / secrets
+config.js
+
+# Editor
+.vscode/
