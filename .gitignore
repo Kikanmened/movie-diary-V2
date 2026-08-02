@@ -14,7 +14,9 @@ build/
 npm-debug.log*
 
 # Environment / secrets
-config.js
+.env
+.env.local
+.env.*.local
 
 # Editor
 .vscode/
