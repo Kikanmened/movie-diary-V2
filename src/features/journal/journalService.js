@@ -5,7 +5,7 @@ import { getUserScopedKey, getUserScopedList, setUserScopedList } from "../../ut
 const JOURNAL_KEY = "movieDiaryJournal";
 
 /**
- * Returns the user-scoped localStorage key for the current journal.
+ * Returns the per-user localStorage key for the current journal.
  * @returns {string | null}
  */
 export function getJournalKey() {
@@ -13,7 +13,7 @@ export function getJournalKey() {
 }
 
 /**
- * Reads the currently signed-in user's journal list.
+ * Reads the current user's journal entries from localStorage.
  * @returns {Array}
  */
 export function getJournal() {
@@ -21,7 +21,7 @@ export function getJournal() {
 }
 
 /**
- * Saves the user journal list.
+ * Saves the whole journal list for the current user.
  * @returns {boolean}
  */
 export function saveJournal(entries) {
@@ -29,7 +29,7 @@ export function saveJournal(entries) {
 }
 
 /**
- * Updates one note in the journal and persists it.
+ * Updates a single movie note in the journal.
  * @returns {{ ok: boolean, message: string }}
  */
 export function updateNote(movieId, newNote) {
@@ -57,9 +57,9 @@ export function updateNote(movieId, newNote) {
 }
 
 /**
- * Renders the journal page for the signed-in user.
- * @param {HTMLElement | null} entriesElement
- * @param {HTMLElement | null} emptyStateElement
+ * Builds the journal page DOM for the currently signed-in user.
+ * @param {HTMLElement} entriesElement
+ * @param {HTMLElement} emptyStateElement
  */
 export function renderJournal(entriesElement, emptyStateElement) {
     if (!entriesElement || !emptyStateElement) return;
@@ -100,10 +100,7 @@ export function renderJournal(entriesElement, emptyStateElement) {
                 rows="3"
                 placeholder="Write a personal note..."
             >${escapeHtml(movie.note || "")}</textarea>
-            <button
-                class="save-note-btn bg-blue-600 hover:bg-blue-700 text-sm px-3 py-1 rounded self-start"
-                data-movie-id="${movie.id}"
-            >
+            <button class="save-note-btn bg-blue-600 hover:bg-blue-700 text-sm px-3 py-1 rounded self-start" data-movie-id="${movie.id}">
                 Save Note
             </button>
         `;
