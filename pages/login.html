@@ -17,8 +17,8 @@
         <form id="login-form" class="space-y-4 bg-gray-800 p-6 rounded-lg w-full max-w-sm">
             <h1 class="text-2xl font-bold">Login</h1>
 
-            <p id="login-error" class="hidden text-red-400 text-sm"></p>
-            <p id="login-success" class="hidden text-green-400 text-sm"></p>
+            <p id="login-error" class="text-red-400 text-sm" role="alert"></p>
+            <p id="login-success" class="text-green-400 text-sm" role="status"></p>
 
             <label class="block">Email
                 <input id="login-email" type="email" placeholder="Enter email"
@@ -41,36 +41,6 @@
         </form>
     </main>
 
-    <script src="../auth.js"></script>
-    <script>
-        const loginForm = document.querySelector("#login-form");
-        const loginError = document.querySelector("#login-error");
-        const loginSuccess = document.querySelector("#login-success");
-        const loginSubmitBtn = loginForm.querySelector("button[type='submit']");
-
-        loginForm.addEventListener("submit", async (event) => {
-            event.preventDefault();
-            loginError.classList.add("hidden");
-
-            const email = document.querySelector("#login-email").value.trim();
-            const password = document.querySelector("#login-password").value;
-
-            try {
-                await loginUser(email, password);
-
-                loginSuccess.textContent = "Login successful! Redirecting...";
-                loginSuccess.classList.remove("hidden");
-                loginSubmitBtn.disabled = true;
-
-                setTimeout(() => {
-                    window.location.href = "../index.html";
-                }, 800);
-            } catch (error) {
-                loginSuccess.classList.add("hidden");
-                loginError.textContent = error.message;
-                loginError.classList.remove("hidden");
-            }
-        });
-    </script>
+    <script type="module" src="/src/pages/login.js"></script>
 </body>
 </html>

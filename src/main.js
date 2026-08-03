@@ -1,7 +1,6 @@
-// Homepage entry point: wires up search and the popular-movies grid.
-// Auth state (nav links, login/signup) is still handled by the classic
-// auth.js script until issues #4-#6 land and retire it.
+// Homepage entry point: wires up search, popular movies, and auth navigation.
 
+import { updateNavForAuth } from "./features/auth/authNav.js";
 import { loadPopularMovies, runMovieSearch } from "./features/movies/searchService.js";
 
 const searchInput = document.querySelector("#searchInput");
@@ -26,4 +25,5 @@ closeDialog.addEventListener("click", () => {
     searchResults.innerHTML = "";
 });
 
+updateNavForAuth();
 loadPopularMovies(moviesContainer);

@@ -17,8 +17,8 @@
         <form id="signup-form" class="space-y-4 bg-gray-800 p-6 rounded-lg w-full max-w-sm">
             <h1 class="text-2xl font-bold">Create Account</h1>
 
-            <p id="signup-error" class="hidden text-red-400 text-sm"></p>
-            <p id="signup-success" class="hidden text-green-400 text-sm"></p>
+            <p id="signup-error" class="text-red-400 text-sm" role="alert"></p>
+            <p id="signup-success" class="text-green-400 text-sm" role="status"></p>
 
             <label class="block">Username
                 <input id="signup-username" type="text" placeholder="Enter username"
@@ -51,65 +51,6 @@
         </form>
     </main>
 
-    <script src="../auth.js"></script>
-    <script>
-        const signupForm = document.querySelector("#signup-form");
-        const signupError = document.querySelector("#signup-error");
-        const signupSuccess = document.querySelector("#signup-success");
-        const signupSubmitBtn = signupForm.querySelector("button[type='submit']");
-
-        function showSignupError(message) {
-            signupSuccess.classList.add("hidden");
-            signupError.textContent = message;
-            signupError.classList.remove("hidden");
-        }
-
-        signupForm.addEventListener("submit", async (event) => {
-            event.preventDefault();
-            signupError.classList.add("hidden");
-            signupSuccess.classList.add("hidden");
-
-            const username = document.querySelector("#signup-username").value.trim();
-            const email = document.querySelector("#signup-email").value.trim();
-            const password = document.querySelector("#signup-password").value;
-            const confirmPassword = document.querySelector("#signup-confirm-password").value;
-
-            if (!username || !email || !password || !confirmPassword) {
-                showSignupError("Please fill in all fields.");
-                return;
-            }
-
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
-                showSignupError("Please enter a valid email address.");
-                return;
-            }
-
-            if (password !== confirmPassword) {
-                showSignupError("Passwords do not match.");
-                return;
-            }
-
-            if (password.length < 6) {
-                showSignupError("Password must be at least 6 characters.");
-                return;
-            }
-
-            try {
-                await registerUser(username, email, password);
-                await loginUser(email, password);
-
-                signupSuccess.textContent = "Account created successfully! Redirecting...";
-                signupSuccess.classList.remove("hidden");
-                signupSubmitBtn.disabled = true;
-
-                setTimeout(() => {
-                    window.location.href = "../index.html";
-                }, 800);
-            } catch (error) {
-                showSignupError(error.message);
-            }
-        });
-    </script>
+    <script type="module" src="/src/pages/signup.js"></script>
 </body>
 </html>
